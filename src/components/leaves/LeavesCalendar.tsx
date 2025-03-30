@@ -10,7 +10,7 @@ import { ChevronLeft, ChevronRight, Calendar as CalendarIcon, Info } from 'lucid
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
 import type { Leave } from '@/types';
-import { DayClickEventHandler, DayProps } from 'react-day-picker';
+import { DayProps } from 'react-day-picker';
 
 const employeeLeaves: Leave[] = [
   {
@@ -221,7 +221,7 @@ const LeavesCalendar: React.FC = () => {
                           <button
                             {...dayProps}
                             className={cn(
-                              dayProps.className || "",
+                              "h-9 w-9 p-0 font-normal aria-selected:opacity-100",
                               isLeaveDay(date) && "bg-blue-100 text-blue-900 hover:bg-blue-200",
                               isHoliday(date) && "bg-red-100 text-red-900 hover:bg-red-200"
                             )}
