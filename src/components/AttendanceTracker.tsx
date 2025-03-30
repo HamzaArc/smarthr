@@ -4,7 +4,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ClockCheck, Calendar, UserCheck, Clock } from 'lucide-react';
+import { CheckCheck, Calendar, UserCheck, Clock } from 'lucide-react';
 import { format } from 'date-fns';
 import { toast } from '@/hooks/use-toast';
 
@@ -54,7 +54,7 @@ const AttendanceTracker: React.FC = () => {
         <Tabs defaultValue="clock">
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="clock" className="flex items-center gap-2">
-              <ClockCheck className="h-4 w-4" />
+              <CheckCheck className="h-4 w-4" />
               <span>{t('attendance.clockIn')}</span>
             </TabsTrigger>
             <TabsTrigger value="calendar" className="flex items-center gap-2">

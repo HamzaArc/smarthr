@@ -9,14 +9,14 @@ import {
   SidebarHeader,
   SidebarMenu,
   SidebarMenuItem,
-  SidebarMenuLink,
+  SidebarMenuButton,
   SidebarGroup
 } from '@/components/ui/sidebar';
 import { 
   Home, 
   Users, 
   LayoutGrid, 
-  ClipboardCheck, 
+  CheckCheck, 
   CalendarDays, 
   BriefcaseBusiness,
   Settings, 
@@ -33,7 +33,7 @@ const SideMenu: React.FC = () => {
     { path: '/dashboard', icon: Home, label: t('common.dashboard') },
     { path: '/employees', icon: Users, label: t('common.employees') },
     { path: '/departments', icon: LayoutGrid, label: t('common.departments') },
-    { path: '/attendance', icon: ClipboardCheck, label: t('common.attendance') },
+    { path: '/attendance', icon: CheckCheck, label: t('common.attendance') },
     { path: '/leaves', icon: CalendarDays, label: t('common.leaves') },
     { path: '/recruitment', icon: BriefcaseBusiness, label: t('common.recruitment') },
     { path: '/payroll', icon: CreditCard, label: t('common.payroll') },
@@ -60,15 +60,15 @@ const SideMenu: React.FC = () => {
           <SidebarMenu>
             {menuItems.map((item) => (
               <SidebarMenuItem key={item.path}>
-                <SidebarMenuLink 
+                <SidebarMenuButton 
                   asChild 
-                  active={isActive(item.path)}
+                  isActive={isActive(item.path)}
                 >
                   <Link to={item.path} className="flex items-center gap-3">
                     <item.icon className="h-5 w-5" />
                     <span>{item.label}</span>
                   </Link>
-                </SidebarMenuLink>
+                </SidebarMenuButton>
               </SidebarMenuItem>
             ))}
           </SidebarMenu>
