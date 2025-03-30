@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { format, getMonth, getYear, parseISO } from 'date-fns';
@@ -11,8 +10,8 @@ import { ChevronLeft, ChevronRight, Calendar as CalendarIcon, Info } from 'lucid
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
 import type { Leave } from '@/types';
+import { DayClickEventHandler, DayProps } from 'react-day-picker';
 
-// Sample employee leaves
 const employeeLeaves: Leave[] = [
   {
     id: '1',
@@ -43,14 +42,12 @@ const employeeLeaves: Leave[] = [
   },
 ];
 
-// Mock employee data
 const employeeNames: Record<string, string> = {
   emp001: 'Ahmed Khalid',
   emp005: 'Sara Mansouri',
   emp008: 'Karim El Ouazzani',
 };
 
-// Moroccan national holidays for 2023
 const nationalHolidays = [
   { date: '2023-01-01', name: 'New Year\'s Day' },
   { date: '2023-01-11', name: 'Manifesto of Independence' },
@@ -61,7 +58,6 @@ const nationalHolidays = [
   { date: '2023-08-21', name: 'Youth Day' },
   { date: '2023-11-06', name: 'Green March Day' },
   { date: '2023-11-18', name: 'Independence Day' },
-  // Islamic holidays (approximate dates for 2023 as they follow the lunar calendar)
   { date: '2023-04-21', name: 'Eid al-Fitr' },
   { date: '2023-04-22', name: 'Eid al-Fitr Holiday' },
   { date: '2023-06-28', name: 'Eid al-Adha' },
@@ -77,12 +73,10 @@ const LeavesCalendar: React.FC = () => {
   const [selectedMonth, setSelectedMonth] = useState<string>(getMonth(new Date()).toString());
   const [selectedEmployee, setSelectedEmployee] = useState<string>('all');
 
-  // Filter leaves based on selected employee
   const filteredLeaves = selectedEmployee === 'all'
     ? employeeLeaves
     : employeeLeaves.filter(leave => leave.employeeId === selectedEmployee);
 
-  // Function to check if a date is a leave day for any employee
   const isLeaveDay = (date: Date) => {
     return filteredLeaves.some(leave => {
       const startDate = parseISO(leave.startDate);
@@ -91,7 +85,6 @@ const LeavesCalendar: React.FC = () => {
     });
   };
 
-  // Function to check if a date is a national holiday
   const isHoliday = (date: Date) => {
     return nationalHolidays.some(holiday => {
       const holidayDate = parseISO(holiday.date);
@@ -101,7 +94,6 @@ const LeavesCalendar: React.FC = () => {
     });
   };
 
-  // Function to get leave info for a specific date
   const getLeavesForDate = (date: Date) => {
     return filteredLeaves.filter(leave => {
       const startDate = parseISO(leave.startDate);
@@ -110,7 +102,6 @@ const LeavesCalendar: React.FC = () => {
     });
   };
 
-  // Function to get holiday info for a specific date
   const getHolidayForDate = (date: Date) => {
     return nationalHolidays.find(holiday => {
       const holidayDate = parseISO(holiday.date);
@@ -120,7 +111,6 @@ const LeavesCalendar: React.FC = () => {
     });
   };
 
-  // Rendered day content with colored indicators for leaves and holidays
   const renderDay = (day: Date) => {
     const isLeave = isLeaveDay(day);
     const isNationalHoliday = isHoliday(day);
@@ -138,11 +128,9 @@ const LeavesCalendar: React.FC = () => {
     );
   };
 
-  // Generate available years (current year +/- 2 years)
   const currentYear = getYear(new Date());
   const availableYears = Array.from({ length: 5 }, (_, i) => (currentYear - 2 + i).toString());
 
-  // Generate months
   const months = Array.from({ length: 12 }, (_, i) => i.toString());
 
   return (
@@ -223,10 +211,7 @@ const LeavesCalendar: React.FC = () => {
                 holiday: "holiday",
               }}
               components={{
-                Day: (props) => {
-                  // Correctly destructure the props, ensuring we get the right properties
-                  const { date, selected, disabled, ...dayProps } = props;
-                  
+                Day: ({ date, ...dayProps }: DayProps) => {
                   if (!date) return null;
                   
                   return (
@@ -236,7 +221,7 @@ const LeavesCalendar: React.FC = () => {
                           <button
                             {...dayProps}
                             className={cn(
-                              dayProps.className,
+                              dayProps.className || "",
                               isLeaveDay(date) && "bg-blue-100 text-blue-900 hover:bg-blue-200",
                               isHoliday(date) && "bg-red-100 text-red-900 hover:bg-red-200"
                             )}
