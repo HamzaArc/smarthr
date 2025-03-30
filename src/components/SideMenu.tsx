@@ -71,8 +71,7 @@ const SideMenu: React.FC = () => {
                 <SidebarMenuButton 
                   asChild 
                   isActive={isActive(item.path)}
-                  className="text-white/80 hover:text-white hover:bg-white/10"
-                  activeClassName="bg-white/20 text-white"
+                  className={`text-white/80 hover:text-white hover:bg-white/10 ${isActive(item.path) ? 'bg-white/20 text-white' : ''}`}
                 >
                   <Link to={item.path} className="flex items-center gap-3 rounded-lg">
                     <item.icon className="h-5 w-5" />
