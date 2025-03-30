@@ -5,8 +5,42 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import StatCard from '@/components/StatCard';
 import EmployeeList from '@/components/EmployeeList';
 import AttendanceTracker from '@/components/AttendanceTracker';
-import { Users, UserCheck, UserMinus, LayoutGrid, CheckSquare, Calendar, CalendarClock, Smile } from 'lucide-react';
+import { Users, UserCheck, UserMinus, LayoutGrid, CheckSquare, Calendar, CalendarClock, Smile, TrendingUp, UserCog, DollarSign, BarChart3 } from 'lucide-react';
 import { departments, employees } from '@/services/mockData';
+import { AreaChart, Area, BarChart, Bar, PieChart, Pie, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell } from 'recharts';
+
+// Analytics data
+const departmentSizeData = [
+  { name: 'HR', value: 12 },
+  { name: 'IT', value: 24 },
+  { name: 'Finance', value: 18 },
+  { name: 'Marketing', value: 14 },
+  { name: 'Sales', value: 22 },
+];
+
+const employeeGrowthData = [
+  { month: 'Jan', employees: 120 },
+  { month: 'Feb', employees: 132 },
+  { month: 'Mar', employees: 145 },
+  { month: 'Apr', employees: 155 },
+  { month: 'May', employees: 165 },
+  { month: 'Jun', employees: 180 },
+  { month: 'Jul', employees: 190 },
+  { month: 'Aug', employees: 205 },
+];
+
+const attritionData = [
+  { month: 'Jan', rate: 2.3 },
+  { month: 'Feb', rate: 2.1 },
+  { month: 'Mar', rate: 1.8 },
+  { month: 'Apr', rate: 2.2 },
+  { month: 'May', rate: 1.9 },
+  { month: 'Jun', rate: 1.7 },
+  { month: 'Jul', rate: 1.5 },
+  { month: 'Aug', rate: 1.6 },
+];
+
+const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff8042', '#0088FE'];
 
 const Dashboard: React.FC = () => {
   const { user } = useAuth();
@@ -103,19 +137,118 @@ const Dashboard: React.FC = () => {
         </Card>
       </div>
       
-      {/* HR Dashboard preview image */}
+      {/* HR Analytics Dashboard section - replacing the image with actual analytics */}
       <div className="mt-4">
         <Card className="overflow-hidden">
           <CardHeader>
             <CardTitle>HR Analytics Dashboard</CardTitle>
             <CardDescription>Real-time overview of your HR metrics</CardDescription>
           </CardHeader>
-          <CardContent className="p-0">
-            <img 
-              src="/lovable-uploads/d9ff0fa8-a5e6-4d0e-be04-1894a710bc9c.png" 
-              alt="HR Dashboard Preview" 
-              className="w-full h-auto object-cover rounded-b-lg"
-            />
+          <CardContent className="p-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+              <Card>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-base">Employee Growth</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="h-48">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <AreaChart
+                        data={employeeGrowthData}
+                        margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+                      >
+                        <defs>
+                          <linearGradient id="colorEmployees" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
+                            <stop offset="95%" stopColor="#8884d8" stopOpacity={0.1}/>
+                          </linearGradient>
+                        </defs>
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="month" tick={{ fontSize: 10 }} />
+                        <YAxis tick={{ fontSize: 10 }} />
+                        <Tooltip />
+                        <Area type="monotone" dataKey="employees" stroke="#8884d8" fillOpacity={1} fill="url(#colorEmployees)" />
+                      </AreaChart>
+                    </ResponsiveContainer>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-base">Department Distribution</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="h-48">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <PieChart>
+                        <Pie
+                          data={departmentSizeData}
+                          cx="50%"
+                          cy="50%"
+                          innerRadius={30}
+                          outerRadius={60}
+                          fill="#8884d8"
+                          paddingAngle={5}
+                          dataKey="value"
+                        >
+                          {departmentSizeData.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                          ))}
+                        </Pie>
+                        <Tooltip formatter={(value, name) => [`${value} employees`, name]} />
+                        <Legend />
+                      </PieChart>
+                    </ResponsiveContainer>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-base">Attrition Rate</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="h-48">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <LineChart
+                        data={attritionData}
+                        margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+                      >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="month" tick={{ fontSize: 10 }} />
+                        <YAxis tick={{ fontSize: 10 }} />
+                        <Tooltip formatter={(value) => [`${value}%`, 'Attrition Rate']} />
+                        <Line type="monotone" dataKey="rate" stroke="#ff8042" strokeWidth={2} dot={{ r: 3 }} />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <StatCard 
+                title="Avg. Retention"
+                value="4.2 yrs"
+                icon={<UserCog className="h-6 w-6 text-indigo-600" />}
+              />
+              <StatCard 
+                title="Avg. Salary"
+                value="$68,500"
+                icon={<DollarSign className="h-6 w-6 text-emerald-600" />}
+              />
+              <StatCard 
+                title="Productivity"
+                value="+24%"
+                icon={<TrendingUp className="h-6 w-6 text-blue-600" />}
+              />
+              <StatCard 
+                title="Pending Reviews"
+                value="18"
+                icon={<BarChart3 className="h-6 w-6 text-amber-600" />}
+              />
+            </div>
           </CardContent>
         </Card>
       </div>

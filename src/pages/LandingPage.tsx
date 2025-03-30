@@ -3,13 +3,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { useLanguage } from '@/contexts/LanguageContext';
 import { Check, ChevronRight, BarChart, Calendar, Users, Shield, Clock, Zap } from 'lucide-react';
 import LanguageSelector from '@/components/LanguageSelector';
 
 const LandingPage: React.FC = () => {
-  const { t } = useLanguage();
-
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
@@ -103,7 +100,7 @@ const LandingPage: React.FC = () => {
                 
                 <div className="glass-card rounded-2xl p-2 shadow-xl">
                   <img 
-                    src="https://cdn.dribbble.com/userupload/6489321/file/original-bc9b9511c4dab8d86f58f8fdf4d8875b.png?resize=1024x768" 
+                    src="/lovable-uploads/95c7791c-b64a-4c91-b1b1-95c6e7ffec77.png" 
                     alt="HR Dashboard Preview" 
                     className="w-full h-auto rounded-xl shadow-sm"
                   />
@@ -228,7 +225,7 @@ const LandingPage: React.FC = () => {
         <div className="container mx-auto">
           <div className="text-center max-w-3xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to transform your HR operations?</h2>
-            <p className="text-xl mb-8 opacity-90">Join thousands of companies using Smart HRs</p>
+            <p className="text-xl mb-8 text-white opacity-90">Join thousands of companies using Smart HRs</p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link to="/login">
                 <Button size="lg" variant="secondary" className="w-full sm:w-auto text-indigo-600 font-medium">

@@ -1,6 +1,5 @@
 
 import React, { useState } from 'react';
-import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -94,7 +93,6 @@ const chartConfig = {
 };
 
 const DepartmentKPIs: React.FC = () => {
-  const { t } = useLanguage();
   const [selectedDepartment, setSelectedDepartment] = useState<string>('all');
 
   // Filter data based on selected department
@@ -142,15 +140,15 @@ const DepartmentKPIs: React.FC = () => {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight">{t('departments.kpis')}</h2>
-          <p className="text-muted-foreground">{t('departments.kpisDescription')}</p>
+          <h2 className="text-2xl font-bold tracking-tight">Performance Metrics</h2>
+          <p className="text-muted-foreground">Analyze department performance and metrics</p>
         </div>
         <Select value={selectedDepartment} onValueChange={setSelectedDepartment}>
           <SelectTrigger className="w-[200px]">
-            <SelectValue placeholder={t('departments.selectDepartment')} />
+            <SelectValue placeholder="Select Department" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">{t('departments.allDepartments')}</SelectItem>
+            <SelectItem value="all">All Departments</SelectItem>
             {departmentPerformanceData.map((dept) => (
               <SelectItem key={dept.name} value={dept.name}>{dept.name}</SelectItem>
             ))}
@@ -163,7 +161,7 @@ const DepartmentKPIs: React.FC = () => {
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">{t('departments.employees')}</p>
+                <p className="text-sm font-medium text-muted-foreground">Employees</p>
                 <h3 className="text-2xl font-bold mt-1">
                   {selectedDepartment !== 'all' ? selectedStats?.employees : overallStats.totalEmployees}
                 </h3>
@@ -187,7 +185,7 @@ const DepartmentKPIs: React.FC = () => {
                 ) : (
                   <span className="text-muted-foreground">No change</span>
                 )}
-                <span className="text-muted-foreground ml-1">{t('departments.thisYear')}</span>
+                <span className="text-muted-foreground ml-1">this year</span>
               </div>
             )}
           </CardContent>
@@ -197,7 +195,7 @@ const DepartmentKPIs: React.FC = () => {
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">{t('departments.efficiency')}</p>
+                <p className="text-sm font-medium text-muted-foreground">Efficiency</p>
                 <h3 className="text-2xl font-bold mt-1">
                   {selectedDepartment !== 'all' ? selectedStats?.efficiency : overallStats.avgEfficiency}%
                 </h3>
@@ -221,7 +219,7 @@ const DepartmentKPIs: React.FC = () => {
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">{t('departments.satisfaction')}</p>
+                <p className="text-sm font-medium text-muted-foreground">Satisfaction</p>
                 <h3 className="text-2xl font-bold mt-1">
                   {selectedDepartment !== 'all' ? selectedStats?.satisfaction : overallStats.avgSatisfaction}%
                 </h3>
@@ -245,7 +243,7 @@ const DepartmentKPIs: React.FC = () => {
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-muted-foreground">{t('departments.attendance')}</p>
+                <p className="text-sm font-medium text-muted-foreground">Attendance</p>
                 <h3 className="text-2xl font-bold mt-1">
                   {selectedDepartment !== 'all' ? selectedStats?.attendance : overallStats.avgAttendance}%
                 </h3>
@@ -269,19 +267,19 @@ const DepartmentKPIs: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card>
           <CardHeader>
-            <CardTitle>{t('departments.performanceOverview')}</CardTitle>
-            <CardDescription>{t('departments.performanceDescription')}</CardDescription>
+            <CardTitle>Performance Overview</CardTitle>
+            <CardDescription>Efficiency, retention and satisfaction metrics</CardDescription>
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="bar">
               <TabsList className="grid w-full grid-cols-2 mb-4">
                 <TabsTrigger value="bar" className="flex items-center gap-2">
                   <BarChart3 className="h-4 w-4" />
-                  <span>{t('common.barChart')}</span>
+                  <span>Bar Chart</span>
                 </TabsTrigger>
                 <TabsTrigger value="line" className="flex items-center gap-2">
                   <LineChartIcon className="h-4 w-4" />
-                  <span>{t('common.lineChart')}</span>
+                  <span>Line Chart</span>
                 </TabsTrigger>
               </TabsList>
               
@@ -302,9 +300,9 @@ const DepartmentKPIs: React.FC = () => {
                       <YAxis />
                       <Tooltip />
                       <Legend />
-                      <Bar dataKey="efficiency" name={t('departments.efficiency')} fill={chartConfig.efficiency.color} />
-                      <Bar dataKey="retention" name={t('departments.retention')} fill={chartConfig.retention.color} />
-                      <Bar dataKey="satisfaction" name={t('departments.satisfaction')} fill={chartConfig.satisfaction.color} />
+                      <Bar dataKey="efficiency" name="Efficiency" fill={chartConfig.efficiency.color} />
+                      <Bar dataKey="retention" name="Retention" fill={chartConfig.retention.color} />
+                      <Bar dataKey="satisfaction" name="Satisfaction" fill={chartConfig.satisfaction.color} />
                     </BarChart>
                   </ResponsiveContainer>
                 </ChartContainer>
@@ -327,9 +325,9 @@ const DepartmentKPIs: React.FC = () => {
                       <YAxis />
                       <Tooltip />
                       <Legend />
-                      <Line type="monotone" dataKey="efficiency" name={t('departments.efficiency')} stroke={chartConfig.efficiency.color} />
-                      <Line type="monotone" dataKey="retention" name={t('departments.retention')} stroke={chartConfig.retention.color} />
-                      <Line type="monotone" dataKey="satisfaction" name={t('departments.satisfaction')} stroke={chartConfig.satisfaction.color} />
+                      <Line type="monotone" dataKey="efficiency" name="Efficiency" stroke={chartConfig.efficiency.color} />
+                      <Line type="monotone" dataKey="retention" name="Retention" stroke={chartConfig.retention.color} />
+                      <Line type="monotone" dataKey="satisfaction" name="Satisfaction" stroke={chartConfig.satisfaction.color} />
                     </LineChart>
                   </ResponsiveContainer>
                 </ChartContainer>
@@ -340,8 +338,8 @@ const DepartmentKPIs: React.FC = () => {
 
         <Card>
           <CardHeader>
-            <CardTitle>{t('departments.satisfactionTrend')}</CardTitle>
-            <CardDescription>{t('departments.satisfactionTrendDescription')}</CardDescription>
+            <CardTitle>Satisfaction Trend</CardTitle>
+            <CardDescription>Employee satisfaction over time by department</CardDescription>
           </CardHeader>
           <CardContent>
             <ChartContainer config={chartConfig} className="h-80">
@@ -381,8 +379,8 @@ const DepartmentKPIs: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card>
           <CardHeader>
-            <CardTitle>{t('departments.departmentGrowth')}</CardTitle>
-            <CardDescription>{t('departments.departmentGrowthDescription')}</CardDescription>
+            <CardTitle>Department Growth</CardTitle>
+            <CardDescription>Employee count comparison year over year</CardDescription>
           </CardHeader>
           <CardContent>
             <ChartContainer config={chartConfig} className="h-80">
@@ -401,8 +399,8 @@ const DepartmentKPIs: React.FC = () => {
                   <YAxis />
                   <Tooltip />
                   <Legend />
-                  <Bar dataKey="previous" name={t('departments.previousYear')} fill="#8884d8" />
-                  <Bar dataKey="current" name={t('departments.currentYear')} fill="#82ca9d" />
+                  <Bar dataKey="previous" name="Previous Year" fill="#8884d8" />
+                  <Bar dataKey="current" name="Current Year" fill="#82ca9d" />
                 </BarChart>
               </ResponsiveContainer>
             </ChartContainer>
@@ -411,8 +409,8 @@ const DepartmentKPIs: React.FC = () => {
 
         <Card>
           <CardHeader>
-            <CardTitle>{t('departments.attendanceRate')}</CardTitle>
-            <CardDescription>{t('departments.attendanceRateDescription')}</CardDescription>
+            <CardTitle>Attendance Rate</CardTitle>
+            <CardDescription>Percentage of attendance by department</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="h-80 flex items-center justify-center">
