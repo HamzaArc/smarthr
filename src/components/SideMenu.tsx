@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocation, Link } from 'react-router-dom';
 import { 
   Sidebar, 
@@ -29,7 +28,6 @@ import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 
 const SideMenu: React.FC = () => {
-  const { t } = useLanguage();
   const { logout } = useAuth();
   const location = useLocation();
 
@@ -53,7 +51,7 @@ const SideMenu: React.FC = () => {
   };
 
   return (
-    <Sidebar className="bg-gradient-to-b from-indigo-600 to-blue-700 text-white border-r-0">
+    <Sidebar className="bg-gradient-to-b from-[#1e293b] to-[#0f172a] text-white border-r-0">
       <SidebarHeader className="flex h-16 items-center px-6 border-b border-white/10">
         <Link to="/" className="flex items-center gap-2 font-semibold">
           <div className="flex h-8 w-8 items-center justify-center rounded-md bg-white">
@@ -71,7 +69,7 @@ const SideMenu: React.FC = () => {
                 <SidebarMenuButton 
                   asChild 
                   isActive={isActive(item.path)}
-                  className={`text-white/90 hover:text-white hover:bg-white/10 ${isActive(item.path) ? 'bg-white/20 text-white' : ''}`}
+                  className={`text-white/90 hover:text-white hover:bg-white/10 ${isActive(item.path) ? 'bg-yellow-500/90 text-white' : ''}`}
                 >
                   <Link to={item.path} className="flex items-center gap-3 rounded-lg">
                     <item.icon className="h-5 w-5" />

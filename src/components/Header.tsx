@@ -11,7 +11,6 @@ import { SidebarTrigger } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
 
 const Header: React.FC = () => {
-  const { t } = useLanguage();
   const { isAuthenticated } = useAuth();
 
   return (

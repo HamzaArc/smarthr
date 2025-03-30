@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { useLanguage } from '@/contexts/LanguageContext';
 import { useAuth } from '@/contexts/AuthContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import StatCard from '@/components/StatCard';
@@ -10,7 +9,6 @@ import { Users, UserCheck, UserMinus, LayoutGrid, CheckSquare, Calendar, Calenda
 import { departments, employees } from '@/services/mockData';
 
 const Dashboard: React.FC = () => {
-  const { t } = useLanguage();
   const { user } = useAuth();
   
   // Calculate some stats
@@ -20,44 +18,44 @@ const Dashboard: React.FC = () => {
   return (
     <div className="p-6 space-y-6">
       <div className="flex flex-col space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight">{t('common.dashboard')}</h1>
+        <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
         <p className="text-muted-foreground">
-          {t('common.welcome')}, {user?.name}
+          Welcome, {user?.name}
         </p>
       </div>
       
       {/* Stats row */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <StatCard 
-          title={t('dashboard.totalEmployees')}
+          title="Total Employees"
           value={employees.length}
           icon={<Users className="h-6 w-6 text-primary" />}
           trend={{ value: 5, isPositive: true }}
         />
         <StatCard 
-          title={t('dashboard.presentToday')}
+          title="Present Today"
           value={activeEmployees}
           icon={<UserCheck className="h-6 w-6 text-green-600" />}
         />
         <StatCard 
-          title={t('dashboard.onLeave')}
+          title="On Leave"
           value={onLeaveEmployees}
           icon={<UserMinus className="h-6 w-6 text-yellow-500" />}
         />
         <StatCard 
-          title={t('dashboard.departments')}
+          title="Departments"
           value={departments.length}
           icon={<LayoutGrid className="h-6 w-6 text-blue-500" />}
         />
       </div>
       
-      {/* Quick actions and recent activities */}
+      {/* Dashboard preview and employee list */}
       <div className="grid gap-4 md:grid-cols-6">
         <Card className="md:col-span-4">
           <CardHeader>
-            <CardTitle>{t('employees.list')}</CardTitle>
+            <CardTitle>Employee Directory</CardTitle>
             <CardDescription>
-              {t('dashboard.totalEmployees')}: {employees.length}
+              Total Employees: {employees.length}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -67,7 +65,7 @@ const Dashboard: React.FC = () => {
         
         <Card className="md:col-span-2">
           <CardHeader>
-            <CardTitle>{t('dashboard.quickActions')}</CardTitle>
+            <CardTitle>Quick Actions</CardTitle>
             <CardDescription>
               Common daily tasks
             </CardDescription>
@@ -77,30 +75,47 @@ const Dashboard: React.FC = () => {
               <Card className="bg-primary/5 border-0">
                 <CardContent className="p-4 flex flex-col items-center justify-center text-center space-y-2">
                   <CheckSquare className="h-8 w-8 text-primary" />
-                  <span className="text-sm font-medium">{t('attendance.clockIn')}</span>
+                  <span className="text-sm font-medium">Clock In</span>
                 </CardContent>
               </Card>
               <Card className="bg-primary/5 border-0">
                 <CardContent className="p-4 flex flex-col items-center justify-center text-center space-y-2">
                   <Calendar className="h-8 w-8 text-primary" />
-                  <span className="text-sm font-medium">{t('common.leaves')}</span>
+                  <span className="text-sm font-medium">Apply Leave</span>
                 </CardContent>
               </Card>
               <Card className="bg-primary/5 border-0">
                 <CardContent className="p-4 flex flex-col items-center justify-center text-center space-y-2">
                   <CalendarClock className="h-8 w-8 text-primary" />
-                  <span className="text-sm font-medium">{t('common.attendance')}</span>
+                  <span className="text-sm font-medium">View Schedule</span>
                 </CardContent>
               </Card>
               <Card className="bg-primary/5 border-0">
                 <CardContent className="p-4 flex flex-col items-center justify-center text-center space-y-2">
                   <Smile className="h-8 w-8 text-primary" />
-                  <span className="text-sm font-medium">Feedback</span>
+                  <span className="text-sm font-medium">Submit Feedback</span>
                 </CardContent>
               </Card>
             </div>
             
             <AttendanceTracker />
+          </CardContent>
+        </Card>
+      </div>
+      
+      {/* HR Dashboard preview image */}
+      <div className="mt-4">
+        <Card className="overflow-hidden">
+          <CardHeader>
+            <CardTitle>HR Analytics Dashboard</CardTitle>
+            <CardDescription>Real-time overview of your HR metrics</CardDescription>
+          </CardHeader>
+          <CardContent className="p-0">
+            <img 
+              src="/lovable-uploads/d9ff0fa8-a5e6-4d0e-be04-1894a710bc9c.png" 
+              alt="HR Dashboard Preview" 
+              className="w-full h-auto object-cover rounded-b-lg"
+            />
           </CardContent>
         </Card>
       </div>
