@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { toast } from '@/hooks/use-toast';
-import { Loader2 } from 'lucide-react';
+import { Loader2, ArrowLeft } from 'lucide-react';
 
 const Login: React.FC = () => {
   const { t } = useLanguage();
@@ -60,15 +60,21 @@ const Login: React.FC = () => {
   
   return (
     <div className="min-h-screen flex items-center justify-center pattern-bg p-4">
+      <Link to="/" className="absolute top-4 left-4 flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-primary transition-colors">
+        <ArrowLeft className="h-4 w-4" />
+        {t('auth.backToHome')}
+      </Link>
+      
       <div className="w-full max-w-md">
-        <Card className="border-0 shadow-lg">
-          <CardHeader className="space-y-2 text-center">
+        <Card className="border-0 shadow-lg rounded-xl overflow-hidden">
+          <div className="h-2 bg-gradient-to-r from-primary to-blue-400"></div>
+          <CardHeader className="space-y-2 text-center pt-8">
             <div className="flex justify-center">
               <div className="h-12 w-12 rounded-full bg-primary flex items-center justify-center mb-2">
-                <span className="text-xl font-bold text-primary-foreground">SS</span>
+                <span className="text-xl font-bold text-primary-foreground">SH</span>
               </div>
             </div>
-            <CardTitle className="text-2xl">{t('app.name')}</CardTitle>
+            <CardTitle className="text-2xl font-bold">Smart HRs</CardTitle>
             <CardDescription>{t('auth.login')}</CardDescription>
           </CardHeader>
           <form onSubmit={handleSubmit}>
@@ -82,12 +88,13 @@ const Login: React.FC = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   disabled={isLoading}
+                  className="rounded-lg h-11"
                 />
               </div>
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <Label htmlFor="password">{t('auth.password')}</Label>
-                  <Button variant="link" className="p-0 h-auto" size="sm">
+                  <Button variant="link" className="p-0 h-auto text-sm" size="sm">
                     {t('auth.forgotPassword')}
                   </Button>
                 </div>
@@ -97,6 +104,7 @@ const Login: React.FC = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   disabled={isLoading}
+                  className="rounded-lg h-11"
                 />
               </div>
               <div className="flex items-center space-x-2">
@@ -118,13 +126,13 @@ const Login: React.FC = () => {
             <CardFooter className="flex flex-col space-y-4">
               <Button 
                 type="submit" 
-                className="w-full" 
+                className="w-full rounded-lg h-11 transition-all shadow-md hover:shadow-lg"
                 disabled={isLoading}
               >
                 {isLoading ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    <span>Loading...</span>
+                    <span>{t('auth.loggingIn')}</span>
                   </>
                 ) : (
                   t('auth.login')

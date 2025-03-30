@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { AuthProvider } from "@/contexts/AuthContext";
 import AppLayout from "@/layouts/AppLayout";
+import LandingPage from "@/pages/LandingPage";
 import Login from "@/pages/auth/Login";
 import Dashboard from "@/pages/dashboard/Dashboard";
 import Employees from "@/pages/employees/Employees";
@@ -17,6 +18,7 @@ import Departments from "@/pages/departments/Departments";
 import Settings from "@/pages/settings/Settings";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Index from "./pages/Index";
 
 const queryClient = new QueryClient();
 
@@ -29,12 +31,13 @@ const App = () => (
           <Sonner />
           <BrowserRouter>
             <Routes>
+              {/* Public routes */}
+              <Route path="/" element={<LandingPage />} />
               <Route element={<AppLayout />}>
-                {/* Public routes */}
                 <Route path="/login" element={<Login />} />
+                <Route path="/index" element={<Index />} />
                 
                 {/* Protected routes */}
-                <Route path="/" element={<Navigate to="/dashboard" replace />} />
                 <Route 
                   path="/dashboard" 
                   element={
