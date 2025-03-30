@@ -14,7 +14,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 191 83% 28%;
+    --primary: 231 48% 48%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 39 68% 70%;
@@ -31,18 +31,18 @@
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 191 83% 28%;
+    --ring: 231 48% 48%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
     --sidebar-background: 200 29% 19%;
     --sidebar-foreground: 0 0% 100%;
-    --sidebar-primary: 191 83% 28%;
+    --sidebar-primary: 231 48% 48%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 39 68% 70%;
     --sidebar-accent-foreground: 200 29% 19%;
     --sidebar-border: 200 29% 15%;
-    --sidebar-ring: 191 83% 28%;
+    --sidebar-ring: 231 48% 48%;
   }
 
   .dark {
@@ -92,6 +92,7 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Plus Jakarta Sans', sans-serif;
   }
 
   /* Add support for RTL text */
@@ -109,6 +110,14 @@
 @layer components {
   .pattern-bg {
     background-color: #f8f9fa;
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230b7285' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234f46e5' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-sm border border-gray-100 shadow-lg;
+  }
+
+  .hero-gradient {
+    background: linear-gradient(90deg, rgba(79,70,229,1) 0%, rgba(59,130,246,1) 100%);
   }
 }

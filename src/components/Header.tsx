@@ -15,7 +15,7 @@ const Header: React.FC = () => {
   const { isAuthenticated } = useAuth();
 
   return (
-    <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-background px-4 sm:px-6 shadow-sm">
+    <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-white px-4 sm:px-6 shadow-sm">
       <div className="md:hidden">
         <SidebarTrigger>
           <Button variant="ghost" size="sm" className="rounded-lg">
@@ -28,12 +28,12 @@ const Header: React.FC = () => {
       <div className="flex flex-1 items-center justify-end md:justify-between">
         <div className="relative hidden md:flex w-full max-w-sm items-center">
           <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <Search className="h-4 w-4 text-muted-foreground" />
+            <Search className="h-4 w-4 text-gray-400" />
           </div>
           <Input
             type="search"
-            placeholder={t('common.search')}
-            className="pl-10 bg-background rounded-lg border-muted"
+            placeholder="Search..."
+            className="pl-10 bg-gray-50 rounded-lg border-gray-200"
           />
         </div>
         

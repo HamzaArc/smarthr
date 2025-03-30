@@ -34,14 +34,14 @@ const SideMenu: React.FC = () => {
   const location = useLocation();
 
   const menuItems = [
-    { path: '/dashboard', icon: Home, label: t('common.dashboard') },
-    { path: '/employees', icon: Users, label: t('common.employees') },
-    { path: '/departments', icon: LayoutGrid, label: t('common.departments') },
-    { path: '/attendance', icon: CheckCheck, label: t('common.attendance') },
-    { path: '/leaves', icon: CalendarDays, label: t('common.leaves') },
-    { path: '/recruitment', icon: BriefcaseBusiness, label: t('common.recruitment') },
-    { path: '/payroll', icon: CreditCard, label: t('common.payroll') },
-    { path: '/settings', icon: Settings, label: t('common.settings') },
+    { path: '/dashboard', icon: Home, label: 'Dashboard' },
+    { path: '/employees', icon: Users, label: 'Employees' },
+    { path: '/departments', icon: LayoutGrid, label: 'Departments' },
+    { path: '/attendance', icon: CheckCheck, label: 'Attendance' },
+    { path: '/leaves', icon: CalendarDays, label: 'Leaves' },
+    { path: '/recruitment', icon: BriefcaseBusiness, label: 'Recruitment' },
+    { path: '/payroll', icon: CreditCard, label: 'Payroll' },
+    { path: '/settings', icon: Settings, label: 'Settings' },
   ];
 
   const isActive = (path: string) => {
@@ -53,11 +53,11 @@ const SideMenu: React.FC = () => {
   };
 
   return (
-    <Sidebar className="bg-primary text-white border-r-0">
+    <Sidebar className="bg-gradient-to-b from-indigo-600 to-blue-700 text-white border-r-0">
       <SidebarHeader className="flex h-16 items-center px-6 border-b border-white/10">
         <Link to="/" className="flex items-center gap-2 font-semibold">
           <div className="flex h-8 w-8 items-center justify-center rounded-md bg-white">
-            <span className="text-sm font-bold text-primary">SH</span>
+            <span className="text-sm font-bold text-indigo-600">SH</span>
           </div>
           <span className="font-bold text-xl text-white">Smart HRs</span>
         </Link>
@@ -71,7 +71,7 @@ const SideMenu: React.FC = () => {
                 <SidebarMenuButton 
                   asChild 
                   isActive={isActive(item.path)}
-                  className={`text-white/80 hover:text-white hover:bg-white/10 ${isActive(item.path) ? 'bg-white/20 text-white' : ''}`}
+                  className={`text-white/90 hover:text-white hover:bg-white/10 ${isActive(item.path) ? 'bg-white/20 text-white' : ''}`}
                 >
                   <Link to={item.path} className="flex items-center gap-3 rounded-lg">
                     <item.icon className="h-5 w-5" />
@@ -86,7 +86,7 @@ const SideMenu: React.FC = () => {
       
       <SidebarFooter className="border-t border-white/10 p-4">
         <div className="flex flex-col gap-4">
-          <div className="flex items-center gap-3 px-2 py-2 text-white/80 hover:text-white rounded-lg hover:bg-white/10 transition-colors cursor-pointer">
+          <div className="flex items-center gap-3 px-2 py-2 text-white/90 hover:text-white rounded-lg hover:bg-white/10 transition-colors cursor-pointer">
             <HelpCircle className="h-5 w-5" />
             <span>Support</span>
           </div>
@@ -96,10 +96,10 @@ const SideMenu: React.FC = () => {
           <Button 
             variant="ghost" 
             onClick={handleLogout} 
-            className="justify-start text-white/80 hover:text-white hover:bg-white/10"
+            className="justify-start text-white/90 hover:text-white hover:bg-white/10"
           >
             <LogOut className="h-5 w-5 mr-3" />
-            {t('auth.logout')}
+            Logout
           </Button>
         </div>
       </SidebarFooter>
