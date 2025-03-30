@@ -213,7 +213,7 @@ const LeavesCalendar: React.FC = () => {
                 setSelectedMonth(getMonth(date).toString());
                 setSelectedYear(getYear(date).toString());
               }}
-              className="pointer-events-auto border rounded-md"
+              className="border rounded-md"
               modifiers={{
                 leaveDay: (date) => isLeaveDay(date),
                 holiday: (date) => isHoliday(date),
@@ -223,15 +223,15 @@ const LeavesCalendar: React.FC = () => {
                 holiday: "holiday",
               }}
               components={{
-                Day({ date, ...props }) {
+                Day({ date, ...dayProps }) {
                   return (
                     <TooltipProvider>
                       <Tooltip>
                         <TooltipTrigger asChild>
                           <button
-                            {...props}
+                            {...dayProps}
                             className={cn(
-                              props.className,
+                              dayProps.className,
                               isLeaveDay(date) && "bg-blue-100 text-blue-900 hover:bg-blue-200",
                               isHoliday(date) && "bg-red-100 text-red-900 hover:bg-red-200"
                             )}
