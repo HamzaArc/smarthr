@@ -17,9 +17,10 @@ import {
   XAxis, 
   YAxis, 
   CartesianGrid, 
-  Tooltip, 
+  Tooltip as RechartsTooltip, 
   Legend,
-  ResponsiveContainer 
+  ResponsiveContainer, 
+  TooltipProps 
 } from 'recharts';
 import { Badge } from '@/components/ui/badge';
 import { ChartContainer, ChartTooltipContent } from '@/components/ui/chart';
@@ -168,7 +169,7 @@ const SalaryOverview: React.FC = () => {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="name" />
                   <YAxis tickFormatter={(value) => `${value/1000}k`} />
-                  <Tooltip 
+                  <RechartsTooltip 
                     content={({ active, payload }) => {
                       if (active && payload && payload.length) {
                         return (
@@ -177,7 +178,7 @@ const SalaryOverview: React.FC = () => {
                             payload={payload}
                             labelFormatter={(name) => `${name} ${t('common.department')}`}
                             formatter={(value, name) => [
-                              currencyFormatter.format(value), 
+                              currencyFormatter.format(value as number), 
                               chartConfig[name as keyof typeof chartConfig]?.label || name
                             ]}
                           />

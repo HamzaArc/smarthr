@@ -2,7 +2,7 @@
 import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Bank, FileText, BarChart3, CreditCard } from 'lucide-react';
+import { Ban, FileText, BarChart3, CreditCard } from 'lucide-react';
 import SalaryOverview from '@/components/payroll/SalaryOverview';
 import PayrollProcessing from '@/components/payroll/PayrollProcessing'; 
 import PayrollReports from '@/components/payroll/PayrollReports';
@@ -20,7 +20,7 @@ const Payroll: React.FC = () => {
       <Tabs defaultValue="salaries" className="w-full">
         <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="salaries" className="flex items-center gap-2">
-            <Bank className="h-4 w-4" />
+            <Ban className="h-4 w-4" />
             <span>{t('payroll.salaries')}</span>
           </TabsTrigger>
           <TabsTrigger value="processing" className="flex items-center gap-2">

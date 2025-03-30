@@ -10,7 +10,7 @@ import { Switch } from '@/components/ui/switch';
 import { toast } from '@/hooks/use-toast';
 
 const GeneralSettings: React.FC = () => {
-  const { t, currentLanguage, changeLanguage } = useLanguage();
+  const { t, language, setLanguage } = useLanguage();
 
   const handleSaveSettings = () => {
     toast({
@@ -37,7 +37,7 @@ const GeneralSettings: React.FC = () => {
           
           <div className="space-y-2">
             <Label htmlFor="app-language">{t('settings.defaultLanguage')}</Label>
-            <Select value={currentLanguage} onValueChange={changeLanguage}>
+            <Select value={language} onValueChange={setLanguage}>
               <SelectTrigger id="app-language">
                 <SelectValue placeholder={t('settings.selectLanguage')} />
               </SelectTrigger>

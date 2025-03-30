@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
-import { Bank, Calendar, Download, FileDown, FilePdf, Mail, User } from 'lucide-react';
+import { Ban, Calendar, Download, FileDown, Mail, User } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 
 // Sample employee data
@@ -117,7 +117,7 @@ const PayslipView: React.FC = () => {
             variant="outline"
             onClick={handleDownload}
           >
-            <FilePdf className="mr-2 h-4 w-4" />
+            <FileDown className="mr-2 h-4 w-4" />
             {t('payroll.downloadPdf')}
           </Button>
           <Button 
@@ -174,7 +174,7 @@ const PayslipView: React.FC = () => {
                 <p className="text-sm pl-6">{format(payslip.month, 'MMMM yyyy')}</p>
                 
                 <div className="flex items-center gap-2 mt-2">
-                  <Bank className="h-4 w-4 text-muted-foreground" />
+                  <Ban className="h-4 w-4 text-muted-foreground" />
                   <span className="text-sm font-medium">{t('payroll.bankInfo')}:</span>
                 </div>
                 <p className="text-sm pl-6">{payslip.bankInfo}</p>

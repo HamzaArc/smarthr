@@ -225,7 +225,7 @@ const PayrollProcessing: React.FC = () => {
                   <p className="text-sm text-muted-foreground">14 {t('common.employees')}</p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <AlertTriangle className="h-5 w-5 text-amber-500" title="Incomplete" />
+                  <AlertTriangle className="h-5 w-5 text-amber-500" aria-label="Incomplete" />
                   <Download className="h-5 w-5 text-muted-foreground cursor-pointer hover:text-primary" />
                 </div>
               </div>

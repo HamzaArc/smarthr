@@ -9,10 +9,16 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ChartContainer } from '@/components/ui/chart';
-import { DateRange } from '@/components/ui/calendar';
+import { Calendar } from '@/components/ui/calendar';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar } from 'recharts';
 import { CalendarRange, Download, FileDown, FileText, LineChart, BarChart3 } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
+
+// Define DateRange type
+type DateRange = {
+  from: Date | undefined;
+  to: Date | undefined;
+};
 
 // Sample data for the payroll trend chart
 const payrollTrendData = [
@@ -83,7 +89,7 @@ const PayrollReports: React.FC = () => {
   const { t } = useLanguage();
   const [reportFormat, setReportFormat] = useState('pdf');
   const [selectedReport, setSelectedReport] = useState('monthly-summary');
-  const [dateRange, setDateRange] = useState<DateRange | undefined>({
+  const [dateRange, setDateRange] = useState<DateRange>({
     from: new Date(2023, 0, 1),
     to: new Date(),
   });
