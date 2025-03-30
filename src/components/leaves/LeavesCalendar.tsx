@@ -223,7 +223,12 @@ const LeavesCalendar: React.FC = () => {
                 holiday: "holiday",
               }}
               components={{
-                Day({ date, ...dayProps }) {
+                Day: (props) => {
+                  // Correctly destructure the props, ensuring we get the right properties
+                  const { date, selected, disabled, ...dayProps } = props;
+                  
+                  if (!date) return null;
+                  
                   return (
                     <TooltipProvider>
                       <Tooltip>
